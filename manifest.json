@@ -3,7 +3,10 @@
   "name": "Duplicate Tab Closer",
   "version": "1.0",
   "description": "Finds and closes duplicate tabs with a single click.",
-  "permissions": ["tabs"],
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
