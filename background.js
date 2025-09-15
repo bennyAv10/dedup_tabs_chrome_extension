@@ -75,7 +75,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // Auto close logic: Listen for new tab creation
 chrome.tabs.onCreated.addListener(function(newTab) {
   chrome.storage.sync.get({ autoClose: false }, function(items) {
-    console.log(newTab.windowId)
     if (!items.autoClose) return;
     closeDuplicateTabs({scope: "current", windowId: newTab.windowId, keepTabId: newTab.id});
   });

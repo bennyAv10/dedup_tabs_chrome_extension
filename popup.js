@@ -1,47 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const closeTabsBtn = document.getElementById('closeTabsBtn');
-    const closeTabsAllBtn = document.getElementById('closeTabsAllBtn');
-    const statusMessage = document.getElementById('statusMessage');
+    const dedupCurrentBtn = document.getElementById('dedupCurrent');
+    const dedupAllBtn = document.getElementById('dedupAll');
+    const resultDiv = document.getElementById('result');
 
-    closeTabsBtn.addEventListener('click', () => {
-        statusMessage.textContent = 'Searching for duplicate tabs in current window...';
-        closeTabsBtn.disabled = true;
-        closeTabsAllBtn.disabled = true;
+    dedupCurrentBtn.addEventListener('click', () => {
+        resultDiv.textContent = 'Searching for duplicate tabs in current window...';
+        dedupCurrentBtn.disabled = true;
+        dedupAllBtn.disabled = true;
         chrome.runtime.sendMessage({ action: "closeDuplicateTabs" }, (response) => {
             if (chrome.runtime.lastError) {
-                statusMessage.textContent = 'Error: ' + chrome.runtime.lastError.message;
+                resultDiv.textContent = 'Error: ' + chrome.runtime.lastError.message;
             } else if (response) {
                 if (response.status === "success") {
                     if (response.count > 0) {
-                        statusMessage.textContent = `Success! Closed ${response.count} duplicate tab(s) in current window.`;
+                        resultDiv.textContent = `Success! Closed ${response.count} duplicate tab(s) in current window.`;
+                    } else {
+                        resultDiv.textContent = 'No duplicate tabs found in current window.';
                     }
                 } else if (response.status === "no_duplicates") {
-                    statusMessage.textContent = 'No duplicate tabs found in current window.';
+                    resultDiv.textContent = 'No duplicate tabs found in current window.';
                 }
             }
-            closeTabsBtn.disabled = false;
-            closeTabsAllBtn.disabled = false;
+            dedupCurrentBtn.disabled = false;
+            dedupAllBtn.disabled = false;
         });
     });
 
-    closeTabsAllBtn.addEventListener('click', () => {
-        statusMessage.textContent = 'Searching for duplicate tabs in all windows...';
-        closeTabsBtn.disabled = true;
-        closeTabsAllBtn.disabled = true;
+    dedupAllBtn.addEventListener('click', () => {
+        resultDiv.textContent = 'Searching for duplicate tabs in all windows...';
+        dedupCurrentBtn.disabled = true;
+        dedupAllBtn.disabled = true;
         chrome.runtime.sendMessage({ action: "closeDuplicateTabsAcrossWindows" }, (response) => {
             if (chrome.runtime.lastError) {
-                statusMessage.textContent = 'Error: ' + chrome.runtime.lastError.message;
+                resultDiv.textContent = 'Error: ' + chrome.runtime.lastError.message;
             } else if (response) {
                 if (response.status === "success") {
                     if (response.count > 0) {
-                        statusMessage.textContent = `Success! Closed ${response.count} duplicate tab(s) across all windows.`;
+                        resultDiv.textContent = `Success! Closed ${response.count} duplicate tab(s) across all windows.`;
+                    } else {
+                        resultDiv.textContent = 'No duplicate tabs found across all windows.';
                     }
                 } else if (response.status === "no_duplicates") {
-                    statusMessage.textContent = 'No duplicate tabs found across all windows.';
+                    resultDiv.textContent = 'No duplicate tabs found across all windows.';
                 }
             }
-            closeTabsBtn.disabled = false;
-            closeTabsAllBtn.disabled = false;
+            dedupCurrentBtn.disabled = false;
+            dedupAllBtn.disabled = false;
         });
     });
 });

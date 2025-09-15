@@ -1,3 +1,60 @@
+/* Popup Styles */
+.popup-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(60, 60, 120, 0.12);
+    padding: 22px 18px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 260px;
+    min-height: 220px;
+}
+
+.popup-logo {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+}
+
+.popup-title {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: #3b3b5c;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+}
+
+.popup-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.popup-btn {
+    background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(60, 60, 120, 0.08);
+}
+.popup-btn:hover {
+    background: linear-gradient(90deg, #818cf8 0%, #38bdf8 100%);
+}
+
+.popup-result {
+    margin-top: 18px;
+    font-size: 15px;
+    color: #6366f1;
+    text-align: center;
+    min-height: 22px;
+}
 /* Reset and Base Styles */
 * {
     margin: 0;

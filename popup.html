@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duplicate Tab Closer</title>
     <link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Deduplicate Tabs</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Duplicate Tab Closer</h1>
-        <p>Click the button below to find and close all duplicate tabs.</p>
-    <button id="closeTabsBtn">Close Duplicate Tabs (Current Window)</button>
-    <button id="closeTabsAllBtn">Close Duplicate Tabs (All Windows)</button>
-        <p id="statusMessage"></p>
+    <div class="popup-card">
+        <img src="images/icon48.png" alt="Dedup Tabs" class="popup-logo">
+        <h2 class="popup-title">Deduplicate Tabs</h2>
+        <div class="popup-actions">
+            <button id="dedupCurrent" class="popup-btn">Deduplicate in Current Window</button>
+            <button id="dedupAll" class="popup-btn">Deduplicate Across All Windows</button>
+        </div>
+        <div id="result" class="popup-result"></div>
     </div>
-    <script src="popup.js"></script>
 </body>
+<script src="popup.js"></script>
 </html>
