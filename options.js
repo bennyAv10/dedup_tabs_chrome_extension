@@ -2,7 +2,7 @@
 const DEFAULT_SETTINGS = {
     autoClose: true,
     notifyUser: true,
-    keepNewest: false,
+    keepNewest: true,
     compareFullUrl: false
 };
 
