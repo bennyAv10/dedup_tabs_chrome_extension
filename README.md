@@ -10,7 +10,26 @@ The extension scans all open tabs, identifies those with identical URLs, and clo
 
 ---
 
-## How to Install and Use
+## How to configure and use the extension
+
+### Configuration
+Open the extension options page from manage Extensions page
+From the extension tile, choose details, then open Extension Options
+ * You can disable tabs auto close. In which case you'll need to click the extension icon and click Close Duplicate tabs (If you prefer manual mode, I recommend pinning the extension for easy access)
+ * Enable duplicate tabs closure across windows. If enabled, duplicate tabs will get closed even if they're on a diffrent window
+ * Show Notificatioon
+ * Use Query parameters
+### Usage
+- If auto close is enabled (Default), n further action is needed.
+- You'll see the "Duplicate Tab Closer" icon in your Chrome toolbar.
+- Click the icon to open the popup.
+- Click the **"Close Duplicate Tabs"** button to run the script.
+
+The extension will then display how many duplicate tabs were found and closed.
+
+---
+
+## How to Install the extension from source
 
 ### 1. Download Files
 
@@ -28,10 +47,3 @@ In the top right corner, toggle the **"Developer mode"** switch on.
 
 Click the **"Load unpacked"** button and select the folder containing the extension files.
 
-### 5. Use the Extension
-
-- You'll see the "Duplicate Tab Closer" icon in your Chrome toolbar.
-- Click the icon to open the popup.
-- Click the **"Close Duplicate Tabs"** button to run the script.
-
-The extension will then display how many duplicate tabs were found and closed.
