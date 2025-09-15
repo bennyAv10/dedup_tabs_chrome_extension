@@ -1,25 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Extension Options</title>
+    <title>Dedup Tabs - Settings</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Dedup Tabs Options</h1>
-    <form id="options-form">
-        <label>
-            <input type="checkbox" id="autoClose" />
-            Automatically close duplicate tabs
-        </label>
-        <br>
-        <label>
-            <input type="checkbox" id="notifyUser" />
-            Notify when duplicates are closed
-        </label>
-        <br>
-        <button type="submit">Save</button>
-    </form>
-    <div id="status"></div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <!-- Tab icon SVG -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+                    <path d="M7 7h10v2H7zm0 4h10v2H7z"/>
+                </svg>
+            </div>
+            <h1>Dedup Tabs</h1>
+            <p class="subtitle">Manage your duplicate tab settings</p>
+        </div>
+
+        <form id="options-form">
+            <div class="options-section">
+                <div class="option-group">
+                    <div class="toggle-container">
+                        <div class="option-label">
+                            <span class="option-title">Auto-Close Duplicates</span>
+                            <span class="option-description">Automatically close duplicate tabs when detected</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoClose" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <div class="toggle-container">
+                        <div class="option-label">
+                            <span class="option-title">Show Notifications</span>
+                            <span class="option-description">Display a notification when duplicate tabs are closed</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="notifyUser" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="section-divider">Advanced Options</div>
+
+                <div class="option-group">
+                    <div class="toggle-container">
+                        <div class="option-label">
+                            <span class="option-title">Keep Newest Tab</span>
+                            <span class="option-description">When closing duplicates, keep the newest tab instead of the oldest</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="keepNewest" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <div class="toggle-container">
+                        <div class="option-label">
+                            <span class="option-title">Compare Full URL</span>
+                            <span class="option-description">Include query parameters when checking for duplicates</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="compareFullUrl" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button type="submit" class="btn btn-primary">Save Settings</button>
+                <button type="button" class="btn btn-secondary" id="reset-btn">Reset to Default</button>
+            </div>
+
+            <div id="status" class="status"></div>
+        </form>
+
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#" id="help-link">Help & Support</a>
+                <a href="#" id="feedback-link">Send Feedback</a>
+                <a href="#" id="version-link">Version 1.0.0</a>
+            </div>
+        </div>
+    </div>
+
     <script src="options.js"></script>
 </body>
 </html>
