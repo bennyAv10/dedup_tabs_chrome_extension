@@ -132,9 +132,9 @@ function openHelpPage() {
 
 // Open feedback page
 function openFeedbackPage() {
-    // Open feedback form or email
+    // Open Google Form for feedback
     chrome.tabs.create({
-        url: 'https://github.com/yourusername/dedup-tabs/issues/new'
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLSe372akbBS-vJmVoKUTwiE80gwcWmbGS4gLoghNGNHT08Ac_w/viewform?usp=header'
     });
 }
 
