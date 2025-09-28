@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const dedupCurrentBtn = document.getElementById('dedupCurrent');
     const dedupAllBtn = document.getElementById('dedupAll');
+    const viewStatsBtn = document.getElementById('viewStats');
     const resultDiv = document.getElementById('result');
 
     dedupCurrentBtn.addEventListener('click', () => {
+        console.log("dedup current clicked");
         resultDiv.textContent = 'Searching for duplicate tabs in current window...';
         dedupCurrentBtn.disabled = true;
         dedupAllBtn.disabled = true;
@@ -46,6 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             dedupCurrentBtn.disabled = false;
             dedupAllBtn.disabled = false;
+        });
+    });
+    viewStatsBtn.addEventListener('click', () => {
+        console.log("view stats clicked");
+        chrome.windows.create({
+            url: chrome.runtime.getURL('duplicate-stats.html'),
+            type: 'popup',
+            width: 650,
+            height: 600
         });
     });
 });

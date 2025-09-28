@@ -53,6 +53,7 @@ function closeDuplicateTabs({scope = "current", windowId = null, keepTabId = nul
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log("got request");
   if (request.action === "closeDuplicateTabs") {
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
       if (tabs.length > 0) {
@@ -68,6 +69,63 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
       const currentWindowId = tabs.length > 0 ? tabs[0].windowId : null;
       closeDuplicateTabs({scope: "all", preferWindowId: currentWindowId, callback: sendResponse});
+    });
+    return true;
+  }
+  if (request.action === "getDuplicateStats") {
+    console.log("hi")
+    chrome.tabs.query({active: true, currentWindow: true}, (activeTabs) => {
+      const currentWindowId = activeTabs.length > 0 ? activeTabs[0].windowId : null;
+      
+      chrome.tabs.query({}, (allTabs) => {
+        const urlStats = new Map();
+        
+        // Process all tabs
+        allTabs.forEach(tab => {
+          if (!tab.url) return;
+          const urlStr = tab.url.split('#')[0];
+          
+          if (!urlStats.has(urlStr)) {
+            urlStats.set(urlStr, {
+              url: urlStr,
+              currentWindow: 0,
+              allWindows: 0,
+              tabsInCurrentWindow: [],
+              tabsInAllWindows: []
+            });
+          }
+          
+          const stat = urlStats.get(urlStr);
+          stat.allWindows++;
+          stat.tabsInAllWindows.push(tab);
+          
+          if (tab.windowId === currentWindowId) {
+            stat.currentWindow++;
+            stat.tabsInCurrentWindow.push(tab);
+          }
+        });
+        
+        // Filter only URLs that have duplicates and format for response
+        const duplicateStats = Array.from(urlStats.values())
+          .filter(stat => stat.currentWindow > 1 || stat.allWindows > 1)
+          .sort((a, b) => b.allWindows - a.allWindows)
+          .map(stat => ({
+            url: stat.url,
+            currentWindow: stat.currentWindow,
+            allWindows: stat.allWindows
+          }));
+        
+        // Calculate summary
+        const summary = {
+          currentWindowTotal: duplicateStats.reduce((sum, stat) => sum + Math.max(0, stat.currentWindow - 1), 0),
+          allWindowsTotal: duplicateStats.reduce((sum, stat) => sum + Math.max(0, stat.allWindows - 1), 0)
+        };
+        
+        sendResponse({
+          stats: duplicateStats,
+          summary: summary
+        });
+      });
     });
     return true;
   }
